@@ -1,11 +1,18 @@
 from bot.bot import Bot
+from scraper.articles.test_article import TestArticle
+from scraper.base.article_subscriber import ArticleSubscriber
+from scraper.scraper import Scraper
 
 
-def run():
-    print("running")
-    bot = Bot()
-    bot.run()
+class Main(ArticleSubscriber):
+    def run(self):
+        print("running")
+        bot = Bot()
+        scraper = Scraper()
+        scraper.watch_article(TestArticle())
+        scraper.add_subscriber(self)
+        bot.run()
 
 
 if __name__ == '__main__':
-    run()
+    Main().run()
