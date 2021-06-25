@@ -1,7 +1,7 @@
 from constants import Shop
-from scraper.base.base_article import BaseArticle, ArticleEntry
+from scraper.base.base_article import BaseArticle
 
 
 class TestArticle(BaseArticle):
     def __init__(self):
-        super().__init__("name", [ArticleEntry("url", Shop.BIKE_COMPONENTS)])
+        super().__init__("name", {Shop.BIKE_COMPONENTS: "test"})
