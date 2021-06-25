@@ -31,7 +31,7 @@ class BaseShopScraper:
     def remove_subscriber(self, subscriber: ArticleSubscriber):
         self.subscribers.remove(subscriber)
 
-    def scrape_article(self, soup: BeautifulSoup) -> bool:
+    def scrape_article(self, soup: BeautifulSoup, additional_data=None) -> bool:
         raise NotImplementedError()
 
     def prepare_scraping(self, article: BaseArticle) -> BeautifulSoup:
@@ -50,7 +50,7 @@ class BaseShopScraper:
         while True:
             for article in self.articles:
                 try:
-                    available = self.scrape_article(self.prepare_scraping(article))
+                    available = self.scrape_article(self.prepare_scraping(article), article.additional_data)
                     if available != self.article_states[article.name]:
                         self.article_states[article.name] = available
                         self.notify_subscribers(article)
