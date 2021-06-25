@@ -12,7 +12,7 @@ class BikeComponents(BaseShopScraper):
         for option in options:
             item = option.contents[1]
             in_stock = "site-stock-bg-0" in item.contents[1]["class"]
-            if additional_data:
+            if additional_data is not None:
                 variation = item.contents[2].strip()
                 if variation == additional_data:
                     return in_stock
