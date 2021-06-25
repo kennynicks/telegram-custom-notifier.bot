@@ -1,4 +1,5 @@
 import sys
+from random import random
 from typing import List, Dict
 
 from bs4 import BeautifulSoup
@@ -36,10 +37,12 @@ class BaseShopScraper:
 
     def prepare_scraping(self, article: BaseArticle) -> BeautifulSoup:
         url = article.article_entries.get(self.SHOP)
-        request = requests.get(url)
+        request = requests.get(url, headers={
+            'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0'})
         if request.status_code == 200:
             return BeautifulSoup(request.content, "html.parser")
         else:
+            print(request)
             raise RuntimeError("Request failed")
 
     def notify_subscribers(self, article: BaseArticle):
