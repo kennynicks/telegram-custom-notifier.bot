@@ -1,6 +1,6 @@
 import sys
 from random import random
-from typing import List, Dict
+from typing import List, Dict, Optional
 
 from bs4 import BeautifulSoup
 
@@ -61,3 +61,12 @@ class BaseShopScraper:
                     print(err)
                     pass
                 sleep(30)
+
+    def name(self) -> str:
+        return str(self.SHOP.name).replace("_", " ")
+
+    def get_status(self, article) -> Optional[str]:
+        if article not in self.articles:
+            return None
+        return "*[{}]({})*    _{}_".format(str(self.name()), article.article_entries[self.SHOP],
+                                           "Available" if self.article_states[article.name] else "Not available")

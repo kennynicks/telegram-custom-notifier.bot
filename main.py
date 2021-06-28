@@ -9,9 +9,9 @@ from scraper.scraper import Scraper
 class Main(ArticleSubscriber):
 
     def __init__(self):
-        self.bot = Bot()
         self.scraper = Scraper()
         self.scraper.add_subscriber(self)
+        self.bot = Bot(self.scraper)
 
     def on_change(self, available: bool, shop: Shop, article: BaseArticle) -> None:
         message = "*[{}]({}):*\n_{}_".format(article.name, article.article_entries[shop],
