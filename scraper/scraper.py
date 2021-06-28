@@ -1,4 +1,4 @@
-from typing import List, Dict
+from typing import List
 
 from constants import Shop
 from scraper.base.article_subscriber import ArticleSubscriber
